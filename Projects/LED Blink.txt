@@ -1,0 +1,27 @@
+#include "io430.h"
+void gecikme(void);                     // Gecikme Fonksiyonunu belirtiyoruz.
+ 
+int main( void )
+{
+  // Watchdog timer'i durdur
+  WDTCTL = WDTPW + WDTHOLD;
+ 
+  P1DIR = 0xFF;                         // P1 portunun yönünü belirtiyoruz.
+  P1OUT = 0x00;                         // P1 portunun çikislarini ayarliyoruz.
+  
+  while(1)
+  {
+    P1OUT = 0x01;
+    gecikme();
+    P1OUT = 0x40;
+    gecikme();
+  }
+ 
+  return 0;
+}
+ 
+void gecikme(void){ // Gecikme Fonksiyonunu
+volatile unsigned int i;
+for(i=0 ; i < 50000 ; i ++);
+ 
+}
